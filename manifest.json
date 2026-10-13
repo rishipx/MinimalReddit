@@ -1,0 +1,112 @@
+{
+  "manifest_version": 3,
+  "name": "Minimal Reddit",
+  "version": "1.0.0",
+  "description": "Declutters Reddit with 70+ toggles, content filtering, Zen Dark styling, premade themes, and media tools.",
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "scripting",
+    "contextMenus",
+    "downloads"
+  ],
+  "host_permissions": [
+    "https://*.reddit.com/*",
+    "https://*.redd.it/*",
+    "https://api.pullpush.io/*",
+    "https://arctic-shift.photon-reddit.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background/index.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "Configure Minimal Reddit",
+    "default_icon": {
+      "16": "assets/icons/icon-16.png",
+      "32": "assets/icons/icon-32.png",
+      "48": "assets/icons/icon-48.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.reddit.com/*"
+      ],
+      "css": [
+        "src/content/styles/page-rules.css",
+        "src/content/styles/archive.css",
+        "src/content/styles/modal.css",
+        "src/content/styles/crop-caliper.css"
+      ],
+      "js": [
+        "src/shared/icons.js",
+        "src/shared/defaults.js",
+        "src/shared/themes.js",
+        "src/content/config/selectors.js",
+        "src/content/core/utils.js",
+        "src/content/core/settings.js",
+        "src/content/features/blocking/content-blocker.js",
+        "src/content/features/archive/archive-recovery.js",
+        "src/content/styling/css/css-engine.js",
+        "src/content/styling/css/document-css.js",
+        "src/content/styling/css/shared-css.js",
+        "src/content/styling/theme/theme-tokens.js",
+        "src/content/styling/theme/theme-component-css.js",
+        "src/content/styling/theme/theme-document-css.js",
+        "src/content/styling/theme/theme-shadow-css.js",
+        "src/content/styling/theme/theme-runtime.js",
+        "src/content/styling/surface-repair.js",
+        "src/content/styling/vote-pill.js",
+        "src/content/styling/layout-vars.js",
+        "src/content/features/declutter/label-rules.js",
+        "src/content/features/declutter/interaction-rules.js",
+        "src/content/features/declutter/sidebar-rules.js",
+        "src/content/features/button-labels.js",
+        "src/content/features/post-options.js",
+        "src/content/features/comment-threads.js",
+        "src/content/features/profile-avatar.js",
+        "src/content/features/page-chrome.js",
+        "src/content/features/media/media-resolver.js",
+        "src/content/features/media/media-buttons.js",
+        "src/content/features/media-compat.js",
+        "src/content/features/osint/media-fetch.js",
+        "src/content/features/osint/modal.js",
+        "src/content/features/osint/panels.js",
+        "src/content/features/osint/buttons.js",
+        "src/content/features/lightbox.js",
+        "src/content/features/community-filter.js",
+        "src/content/features/keyboard-navigation.js",
+        "src/content/features/timestamps.js",
+        "src/content/engine/roots.js",
+        "src/content/engine/visual-queue.js",
+        "src/content/engine/pipeline.js",
+        "src/content/engine/observer.js",
+        "src/content/engine/debug-report.js",
+        "src/content/main.js"
+      ],
+      "run_at": "document_start",
+      "exclude_matches": [
+        "*://old.reddit.com/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/fonts/*.woff2"
+      ],
+      "matches": [
+        "*://*.reddit.com/*"
+      ]
+    }
+  ],
+  "minimum_chrome_version": "120",
+  "icons": {
+    "16": "assets/icons/icon-16.png",
+    "32": "assets/icons/icon-32.png",
+    "48": "assets/icons/icon-48.png",
+    "128": "assets/icons/icon-128.png"
+  }
+}

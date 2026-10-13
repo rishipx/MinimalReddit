@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Minimal Reddit</title>
+    <link rel="icon" type="image/png" href="../../assets/icons/icon-32.png">
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div id="popup-scroll">
+    <div class="header">
+        <div class="brand">
+            <img class="mark" src="../../assets/icons/icon-48.png" srcset="../../assets/icons/icon-48.png 1x, ../../assets/icons/icon-128.png 2x" width="38" height="38" alt="Minimal Reddit logo">
+            <div class="titles">
+                <h3>Minimal Reddit</h3>
+                <div class="subtitle">Cut the noise. Keep the good stuff.</div>
+            </div>
+        </div>
+        <div class="toggle-row master-row">
+            <label class="switch" title="Turn Minimal Reddit on or off"><input type="checkbox" id="masterPower"><span class="slider"></span></label>
+        </div>
+    </div>
+
+    <!-- Reload hint: shown when a change only affects content rendered after it. -->
+    <div id="mrxReloadBanner">
+        <span class="banner-ico" data-icon="refresh-cw" data-icon-size="16"></span>
+        <span class="msg">Reload Reddit to apply these changes.</span>
+        <button type="button" id="mrxReloadBannerBtn">Reload</button>
+    </div>
+
+    <div class="settings-search" id="settingsSearch">
+        <span class="search-ico" data-icon="search" data-icon-size="16"></span>
+        <input type="text" id="settingsSearchInput" placeholder="Search settings…" autocomplete="off" spellcheck="false">
+        <button type="button" class="search-clear" id="searchClear" aria-label="Clear search"><span data-icon="x" data-icon-size="14"></span></button>
+        <div class="settings-search-results" id="settingsSearchResults" role="listbox" aria-label="Matching settings"></div>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="tools"><span class="tab-icon" data-icon="wrench" data-icon-size="16"></span>Tools</button>
+        <button class="tab-btn" data-tab="declutter"><span class="tab-icon" data-icon="eraser" data-icon-size="16"></span>Declutter</button>
+        <button class="tab-btn" data-tab="style"><span class="tab-icon" data-icon="palette" data-icon-size="16"></span>Style</button>
+    </div>
+
+    <!-- ============ DECLUTTER ============ -->
+    <div id="tab-declutter" class="tab-panel">
+
+        <section class="section-group" data-section-id="topbar">
+            <div class="section-header">
+                <button type="button" class="section-collapse-btn">
+                    <span class="section-icon" data-icon="panel-top" data-icon-size="15"></span>
+                    <span class="section-label-text">Top Bar</span>
+                    <span class="section-chevron" data-icon="chevron-down" data-icon-size="16"></span>
+                </button>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="card">
+                        <div class="toggle-row"><span>Hide Entire Top Bar</span><label class="switch"><input type="checkbox" id="hideTopBar"><span class="slider"></span></label></div>
+                        <div class="sub-option" data-dim-when="hideTopBar">
+                            <div class="toggle-row"><span>Hide Create Button</span><label class="switch"><input type="checkbox" id="hideCreate"><span class="slider"></span></label></div>
+                            <div class="toggle-row"><span>Hide Chats</span><label class="switch"><input type="checkbox" id="hideChat"><span class="slider"></span></label></div>
+                            <div class="toggle-row"><span>Hide Notifications</span><label class="switch"><input type="checkbox" id="hideNotifications"><span class="slider"></span></label></div>
+                        </div>
+                        <div class="toggle-row"><span>Non-sticky Header Bar (scrolls with page)</span><label class="switch"><input type="checkbox" id="nonStickyHeader"><span class="slider"></span></label></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-group" data-section-id="leftsidebar">
+            <div class="section-header">
+                <button type="button" class="section-collapse-btn">
+                    <span class="section-icon" data-icon="panel-left" data-icon-size="15"></span>
+                    <span class="section-label-text">Left Sidebar</span>
+                    <span class="section-chevron" data-icon="chevron-down" data-icon-size="16"></span>
+                </button>
+                <label class="switch switch-sm"><input type="checkbox" class="section-toggle" data-target="hideLeftSidebar"><span class="slider"></span></label>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+<input type="checkbox" id="hideLeftSidebar" style="display:none" aria-hidden="true" tabindex="-1">
+                    <div class="card" data-dim-when="hideLeftSidebar">
+                        <div class="toggle-row"><span>Hide Popular</span><label class="switch"><input type="checkbox" id="hidePopular"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide News</span><label class="switch"><input type="checkbox" id="hideNews"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Explore</span><label class="switch"><input type="checkbox" id="hideExplore"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Start a Community</span><label class="switch"><input type="checkbox" id="hideStartCommunity"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Games</span><label class="switch"><input type="checkbox" id="hideGamesLink"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Custom Feed</span><label class="switch"><input type="checkbox" id="hideCustomFeedsSection"><span class="slider"></span></label></div>
+                        <div class="sub-option" data-dim-when="hideCustomFeedsSection">
+                            <div class="toggle-row"><span>Hide Create Custom Feed Button</span><label class="switch"><input type="checkbox" id="hideCreateFeed"><span class="slider"></span></label></div>
+                        </div>
+                        <div class="toggle-row"><span>Hide Recent</span><label class="switch"><input type="checkbox" id="hideRecentSection"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Communities</span><label class="switch"><input type="checkbox" id="hideCommunitiesSection"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Resources</span><label class="switch"><input type="checkbox" id="hideResources"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Favorite/Star Button</span><label class="switch"><input type="checkbox" id="hideFavoriteStar"><span class="slider"></span></label></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-group" data-section-id="post">
+            <div class="section-header">
+                <button type="button" class="section-collapse-btn">
+                    <span class="section-icon" data-icon="message-square" data-icon-size="15"></span>
+                    <span class="section-label-text">Post</span>
+                    <span class="section-chevron" data-icon="chevron-down" data-icon-size="16"></span>
+                </button>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="card">
+                        <div class="toggle-row"><span>Hide Upvote / Downvote</span><label class="switch"><input type="checkbox" id="hideVoting"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Comments Button</span><label class="switch"><input type="checkbox" id="hideComments"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Repost Button</span><label class="switch"><input type="checkbox" id="hideRepostButton"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Share Button (Posts)</span><label class="switch"><input type="checkbox" id="hideShareOnPosts"><span class="slider"></span></label></div>
+                        <div class="toggle-row" id="postOptionsSub"><span>Always Show Post Options</span><label class="switch"><input type="checkbox" id="showPostOptions"><span class="slider"></span></label></div>
+                        <div class="sub-option" id="postOptionsChildren">
+                                <div class="toggle-row"><span>Save</span><label class="switch"><input type="checkbox" id="hidePostSaveOption"><span class="slider"></span></label></div>
+                                <div class="toggle-row"><span>Hide</span><label class="switch"><input type="checkbox" id="hidePostHideOption"><span class="slider"></span></label></div>
+                                <div class="toggle-row"><span>Report</span><label class="switch"><input type="checkbox" id="hidePostReportOption"><span class="slider"></span></label></div>
+                                <div class="toggle-row"><span>Award</span><label class="switch"><input type="checkbox" id="hidePostAwardOption"><span class="slider"></span></label></div>
+                                <div class="toggle-row"><span>Follow Post</span><label class="switch"><input type="checkbox" id="hideFollowPostButton"><span class="slider"></span></label></div>
+                        </div>
+                        <div class="toggle-row"><span>Hide Share Button (Comments)</span><label class="switch"><input type="checkbox" id="hideShareOnComments"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Back Button on Posts</span><label class="switch"><input type="checkbox" id="hidePostBackButton"><span class="slider"></span></label></div>
+                        <div class="toggle-row" title="Strips text labels from post/comment action buttons (Reply, Share, Save, Award…), leaving icons only."><span>Hide Post Icon labels</span><label class="switch"><input type="checkbox" id="hideButtonLabels"><span class="slider"></span></label></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-group" data-section-id="feed">
+            <div class="section-header">
+                <button type="button" class="section-collapse-btn">
+                    <span class="section-icon" data-icon="newspaper" data-icon-size="15"></span>
+                    <span class="section-label-text">Feed</span>
+                    <span class="section-chevron" data-icon="chevron-down" data-icon-size="16"></span>
+                </button>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="card">
+                        <div class="toggle-row"><span>Hide Reddit logo in search bar</span><label class="switch"><input type="checkbox" id="hideSearchbarLogo"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Blurred Media Background</span><label class="switch"><input type="checkbox" id="hideBlurredMediaBackground"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Recent Posts</span><label class="switch"><input type="checkbox" id="hideRecentPosts"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Join Button on Posts</span><label class="switch"><input type="checkbox" id="hideJoinButtonOnPosts"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide interface gaps</span><label class="switch"><input type="checkbox" id="hideInterfaceGaps"><span class="slider"></span></label></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-group" data-section-id="subreddit">
+            <div class="section-header">
+                <button type="button" class="section-collapse-btn">
+                    <span class="section-icon" data-icon="users" data-icon-size="15"></span>
+                    <span class="section-label-text">Subreddit</span>
+                    <span class="section-chevron" data-icon="chevron-down" data-icon-size="16"></span>
+                </button>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="card">
+                        <div class="toggle-row"><span>Full-Width Community Banner</span><label class="switch"><input type="checkbox" id="fullWidthBanner"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Community Highlights</span><label class="switch"><input type="checkbox" id="hideCommunityHighlights"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Suggested communities widget</span><label class="switch"><input type="checkbox" id="hideRelatedCommunities"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Right Sidebar</span><label class="switch"><input type="checkbox" id="hideRightSidebar"><span class="slider"></span></label></div>
+                        <div class="sub-option" data-dim-when="hideRightSidebar">
+                                <div class="toggle-row"><span>Hide Rules</span><label class="switch"><input type="checkbox" id="hideSidebarRules"><span class="slider"></span></label></div>
+                                <div class="toggle-row"><span>Hide Related subreddits</span><label class="switch"><input type="checkbox" id="hideSidebarRelatedCommunities"><span class="slider"></span></label></div>
+                                <div class="toggle-row"><span>Hide Moderators</span><label class="switch"><input type="checkbox" id="hideSidebarModerators"><span class="slider"></span></label></div>
+                                <div class="toggle-row"><span>Hide Installed Apps</span><label class="switch"><input type="checkbox" id="hideSidebarInstalledApps"><span class="slider"></span></label></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-group collapsed" data-section-id="filter">
+            <div class="section-header">
+                <button type="button" class="section-collapse-btn">
+                    <span class="section-icon" data-icon="list-filter" data-icon-size="15"></span>
+                    <span class="section-label-text">Filter</span>
+                    <span class="section-chevron" data-icon="chevron-down" data-icon-size="16"></span>
+                </button>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                <div class="section-label">Block Posts</div>
+                <div class="card">
+                    <div class="toggle-row"><span>By keyword in title</span><label class="switch"><input type="checkbox" id="blockPostsByKeyword"><span class="slider"></span></label></div>
+                    <textarea id="blockedPostKeywords" placeholder="One per line. Use /regex/flags for regex."></textarea>
+                    <div class="toggle-row"><span>By author username</span><label class="switch"><input type="checkbox" id="blockPostsByUser"><span class="slider"></span></label></div>
+                    <textarea id="blockedPostUsers" placeholder="Usernames, one per line."></textarea>
+                    <div class="toggle-row"><span>By subreddit name</span><label class="switch"><input type="checkbox" id="blockPostsBySubreddit"><span class="slider"></span></label></div>
+                    <textarea id="blockedSubreddits" placeholder="Subreddit names, one per line."></textarea>
+                </div>
+                <div class="section-label">Block Comments</div>
+                <div class="card">
+                    <div class="toggle-row"><span>By keyword in body</span><label class="switch"><input type="checkbox" id="blockCommentsByKeyword"><span class="slider"></span></label></div>
+                    <textarea id="blockedCommentKeywords" placeholder="One per line. Use /regex/flags for regex."></textarea>
+                    <div class="toggle-row"><span>By author username</span><label class="switch"><input type="checkbox" id="blockCommentsByUser"><span class="slider"></span></label></div>
+                    <textarea id="blockedCommentUsers" placeholder="Usernames, one per line."></textarea>
+                </div>
+                <div class="theme-hint" style="margin: 8px 4px;">Regex is supported by wrapping a line in slashes, e.g. <code>/free\s+vbucks/i</code>.</div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="section-group collapsed" data-section-id="misc">
+            <div class="section-header">
+                <button type="button" class="section-collapse-btn">
+                    <span class="section-icon" data-icon="ellipsis" data-icon-size="15"></span>
+                    <span class="section-label-text">Misc</span>
+                    <span class="section-chevron" data-icon="chevron-down" data-icon-size="16"></span>
+                </button>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="card">
+                        <div class="toggle-row"><span>Hide Advertisements</span><label class="switch"><input type="checkbox" id="hideAds"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Reddit Premium banner</span><label class="switch"><input type="checkbox" id="hideRedditPremium"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Promoted / Ad Posts</span><label class="switch"><input type="checkbox" id="hidePromotedLinks"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide "Get App" Button</span><label class="switch"><input type="checkbox" id="hideGetAppButton"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Advertise Button</span><label class="switch"><input type="checkbox" id="hideAdvertiseButton"><span class="slider"></span></label></div>
+                        <div class="toggle-row"><span>Hide Footer / Copyright Info</span><label class="switch"><input type="checkbox" id="hideFooter"><span class="slider"></span></label></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============ STYLE ============ -->
+    <div id="tab-style" class="tab-panel">
+        <section class="section-group style-section" data-section-id="style-layout">
+            <div class="section-header">
+                <button type="button" class="section-collapse-btn" title="Placement, spacing, shadows, thread styling and timestamps.">
+                    <span class="section-icon" data-icon="panel-top" data-icon-size="15"></span>
+                    <span class="section-label-text">Layout &amp; Styling</span>
+                    <span class="section-chevron" data-icon="chevron-down" data-icon-size="16"></span>
+                </button>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="card">
+                        <div class="toggle-row style-option-row" title="Pins Reddit's right rail to the far-right edge on wide screens."><span>Right sidebar at right edge</span><label class="switch"><input type="checkbox" id="rightSidebarMoved"><span class="slider"></span></label></div>
+                        <div class="toggle-row style-option-row" title="Adds subtle elevation to posts, comments, sidebars and navigation cards."><span>Drop shadows on posts/comments</span><label class="switch"><input type="checkbox" id="dropShadows"><span class="slider"></span></label></div>
+                        <div class="toggle-row style-option-row" title="Cycles through depth-based accent colours for nested comment thread connectors."><span>Multicoloured comment thread lines</span><label class="switch"><input type="checkbox" id="multicolouredCommentLines"><span class="slider"></span></label></div>
+                        <div class="field-label">Scrollbar width</div>
+                        <select id="scrollbarWidth" title="Choose the scrollbar thickness used on Reddit.">
+                            <option value="normal">Normal</option>
+                            <option value="thin">Thin</option>
+                            <option value="hidden">Hidden</option>
+                        </select>
+                    </div>
+
+                    <div class="card">
+                        <div class="field-label">Scale profile avatar: <span id="scaleProfileAvatarLabel">1×</span></div>
+                        <input type="range" id="scaleProfileAvatar" min="1" max="5" step="1" value="1" title="Scales the profile avatar on profile headers; 1× is the original size.">
+                    </div>
+
+                    <div class="card">
+                        <div class="theme-subhead">Timestamps</div>
+                        <div class="toggle-row style-option-row" title="Shows a full absolute date/time beside post timestamps."><span>Absolute Timestamps (Posts)</span><label class="switch"><input type="checkbox" id="absoluteTimestampsPosts"><span class="slider"></span></label></div>
+                        <div class="toggle-row style-option-row" title="Shows a full absolute date/time beside comment timestamps."><span>Absolute Timestamps (Comments)</span><label class="switch"><input type="checkbox" id="absoluteTimestampsComments"><span class="slider"></span></label></div>
+                        <div class="field-label">Format</div>
+                        <select id="timestampFormatPreset" title="Chooses the format used by absolute timestamps.">
+                            <option value="">Default</option>
+                            <option value="dd/MM/yyyy hh:mm AP">dd/MM/yyyy hh:mm AP</option>
+                            <option value="MM/dd/yyyy hh:mm AP">MM/dd/yyyy hh:mm AP</option>
+                            <option value="yyyy-MM-dd hh:mm">yyyy-MM-dd hh:mm</option>
+                            <option value="dddd, MMMM d, yyyy hh:mm AP">dddd, MMMM d, yyyy hh:mm AP</option>
+                            <option value="ddd d MMM yyyy, h:mm ap">ddd d MMM yyyy, h:mm ap</option>
+                            <option value="__custom__">Custom…</option>
+                        </select>
+                        <input type="text" id="timestampFormatCustom" placeholder="dd MMM yyyy, hh:mm AP" title="Custom timestamp format using the token help below.">
+                        <div class="theme-hint">Tokens: yyyy/yy, MMMM/MMM/MM/M, dddd/ddd/dd/d, hh/h, mm/m, ss/s, AP/ap.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-group style-section" data-section-id="style-fonts">
+            <div class="section-header">
+                <button type="button" class="section-collapse-btn" title="Choose the typeface and text sizing used throughout Reddit.">
+                    <span class="section-icon" data-icon="type" data-icon-size="15"></span>
+                    <span class="section-label-text">FONTS</span>
+                    <span class="section-chevron" data-icon="chevron-down" data-icon-size="16"></span>
+                </button>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="card">
+                        <span class="field-label">Font family</span>
+                        <select id="fontSelect" title="Select the typeface used across the Reddit page.">
+                            <option value="">Default (Reddit's font)</option>
+                            <option value="systemui">System UI</option>
+                            <option value="inter">Inter</option>
+                            <option value="opensans">Open Sans</option>
+                            <option value="robotomono">Roboto Mono</option>
+                            <option value="bricolage">Bricolage Grotesque</option>
+                            <option value="abel">Abel</option>
+                            <option value="serif">Serif</option>
+                            <option value="ubuntu">Ubuntu</option>
+                            <option value="cursive">Cursive</option>
+                            <option value="helvetica">Helvetica</option>
+                            <option value="montserrat">Montserrat</option>
+                            <option value="custom">Custom Font (upload)…</option>
+                        </select>
+                        <div class="theme-hint">Inter is bundled locally and available as the extension's open-font option.</div>
+                        <div id="customFontUploadRow" style="display:none;">
+                            <span class="field-label">Font file</span>
+                            <input type="file" id="customFontFile" accept=".ttf,.otf,.woff,.woff2">
+                            <div class="theme-hint" id="customFontStatus">No file chosen.</div>
+                        </div>
+
+                        <div class="theme-divider"></div>
+                        <div class="field-label">Post content size: <span id="resizePostContentLabel">default</span></div>
+                        <input type="range" id="resizePostContent" min="0" max="28" step="1" value="0" title="Sets an explicit post body font size in pixels.">
+                        <div class="field-label">Comment size: <span id="resizeCommentsLabel">default</span></div>
+                        <input type="range" id="resizeComments" min="0" max="28" step="1" value="0" title="Sets an explicit comment body font size in pixels.">
+                        <div class="field-label">Post content weight</div>
+                        <select id="postContentWeight" title="Changes the weight of post body text."><option value="">Default</option><option value="300">Light</option><option value="400">Regular</option><option value="500">Medium</option><option value="600">Semibold</option><option value="700">Bold</option></select>
+                        <div class="field-label">Comment weight</div>
+                        <select id="commentWeight" title="Changes the weight of comment body text."><option value="">Default</option><option value="300">Light</option><option value="400">Regular</option><option value="500">Medium</option><option value="600">Semibold</option><option value="700">Bold</option></select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-group style-section" data-section-id="style-resize">
+            <div class="section-header">
+                <button type="button" class="section-collapse-btn" title="Control the width of feeds, post pages and the left side menu.">
+                    <span class="section-icon" data-icon="sliders-horizontal" data-icon-size="15"></span>
+                    <span class="section-label-text">RESIZE FEED / POST</span>
+                    <span class="section-chevron" data-icon="chevron-down" data-icon-size="16"></span>
+                </button>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="card">
+                        <span class="field-label">Content width mode</span>
+                        <select id="contentWidthMode" title="Choose the overall content width strategy: Reddit default, wide edge-to-edge, or custom percentage.">
+                            <option value="default">Default</option>
+                            <option value="mega">Mega · edge to edge</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                        <div id="contentWidthRow" style="display:none;">
+                            <span class="field-label">Feed / subreddit width: <span id="contentWidthValueLabel">100%</span></span>
+                            <input type="range" id="contentWidthValue" min="40" max="100" step="2" value="100" title="Sets feed and subreddit width as a percentage of the available window.">
+                            <div class="inline-note">Applied to feeds, subreddit, profile, topic, search and custom-feed pages.</div>
+                        </div>
+                        <div id="megaWidthNote" class="inline-note" style="display:none;">Mega uses 97% feed width and 93% post-page width.</div>
+                        <div id="postWidthRow" style="display:none;">
+                            <span class="field-label">Post page width: <span id="postWidthValueLabel">100%</span></span>
+                            <input type="range" id="postWidthValue" min="40" max="100" step="2" value="100" title="Sets post-page content width as a percentage of the window.">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="toggle-row style-option-row" title="Lets you choose a custom left side navigation width."><span>Custom side menu width</span><label class="switch"><input type="checkbox" id="sideMenuWidthEnabled"><span class="slider"></span></label></div>
+                        <div class="field-label">Side menu width: <span id="sideMenuWidthValueLabel">280px</span></div>
+                        <input type="range" id="sideMenuWidthValue" min="200" max="500" step="10" value="280" title="Sets the expanded left navigation width in pixels.">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-group style-section" data-section-id="style-radius">
+            <div class="section-header">
+                <button type="button" class="section-collapse-btn" title="Adjust the corner radius used by Reddit's UI.">
+                    <span class="section-icon" data-icon="scan-search" data-icon-size="15"></span>
+                    <span class="section-label-text">Border Radius</span>
+                    <span class="section-chevron" data-icon="chevron-down" data-icon-size="16"></span>
+                </button>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="card">
+                        <div class="toggle-row style-option-row" title="Overrides Reddit's default corner radius with the slider value."><span>Custom Border Radius</span><label class="switch"><input type="checkbox" id="radiusEnabled"><span class="slider"></span></label></div>
+                        <div class="field-label">Radius: <span id="radiusValueLabel">0px</span></div>
+                        <input type="range" id="radiusValue" min="0" max="40" step="1" value="0" title="Sets the corner radius in pixels.">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-group style-section" data-section-id="style-colours">
+            <div class="section-header">
+                <button type="button" class="section-collapse-btn" title="Override key Reddit accent and background colours.">
+                    <span class="section-icon" data-icon="palette" data-icon-size="15"></span>
+                    <span class="section-label-text">Theme Colours</span>
+                    <span class="section-chevron" data-icon="chevron-down" data-icon-size="16"></span>
+                </button>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="card">
+                        <div class="toggle-row style-option-row" title="Enables the custom primary/secondary/background colour variables below."><span>Custom theme colours</span><label class="switch"><input type="checkbox" id="themeColours"><span class="slider"></span></label></div>
+                        <span class="field-label">Primary (upvote / accent)</span>
+                        <input type="color" id="themePrimaryColor" value="#ff4500" title="Sets Reddit's primary orange/accent colour replacement.">
+                        <span class="field-label">Secondary (links / blue accent)</span>
+                        <input type="color" id="themeSecondaryColor" value="#0079d3" title="Sets Reddit's secondary link/accent colour replacement.">
+                        <span class="field-label">Background override</span>
+                        <input type="color" id="themeBackgroundColor" value="#1a1a1b" title="Sets the neutral background colour used by Reddit surfaces.">
+                        <div class="btn-row"><button class="action-btn" id="clearThemeBgBtn" title="Resets the background override to Reddit's default value.">Clear background override</button></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-group style-section" data-section-id="style-background">
+            <div class="section-header">
+                <button type="button" class="section-collapse-btn" title="Control the overall page background, including gradients, images and blur.">
+                    <span class="section-icon" data-icon="image" data-icon-size="15"></span>
+                    <span class="section-label-text">Background</span>
+                    <span class="section-chevron" data-icon="chevron-down" data-icon-size="16"></span>
+                </button>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="card">
+                        <div class="toggle-row style-option-row" title="Uses a two-colour diagonal gradient across the page background."><span>Gradient background</span><label class="switch"><input type="checkbox" id="gradientBackground"><span class="slider"></span></label></div>
+                        <span class="field-label">Gradient from</span>
+                        <input type="color" id="gradientFrom" value="#1a1a2e" title="Chooses the first gradient colour.">
+                        <span class="field-label">Gradient to</span>
+                        <input type="color" id="gradientTo" value="#16213e" title="Chooses the second gradient colour.">
+                        <div class="toggle-row style-option-row" title="Uses a single custom page background colour when enabled."><span>Custom background colour</span><label class="switch"><input type="checkbox" id="bgColorEnabled"><span class="slider"></span></label></div>
+                        <input type="color" id="bgColor" value="#181818" title="Chooses the custom background colour.">
+                        <span class="field-label">Background image</span>
+                        <input type="file" id="bgImageFile" accept="image/*" title="Loads a local image as the page background.">
+                        <div class="theme-hint" id="bgImageStatus">No image chosen.</div>
+                        <div class="btn-row"><button class="action-btn danger" id="clearBgImageBtn" title="Removes the current custom background image.">Clear Image</button></div>
+                        <span class="field-label">Background blur: <span id="bgBlurValueLabel">0px</span></span>
+                        <input type="range" id="bgBlur" min="0" max="20" step="1" value="0" title="Blurs the custom background image from 0 to 20px.">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-group style-section" data-section-id="style-themes">
+            <div class="section-header">
+                <button type="button" class="section-collapse-btn" title="Choose a built-in theme preset and apply it to Reddit.">
+                    <span class="section-icon" data-icon="palette" data-icon-size="15"></span>
+                    <span class="section-label-text">Themes <span class="beta-badge">(Beta)</span></span>
+                    <span class="section-chevron" data-icon="chevron-down" data-icon-size="16"></span>
+                </button>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="card">
+                        <div class="theme-stack">
+                            <select id="presetThemeSelect" title="Choose a built-in theme preset. Default restores Reddit's normal styling.">
+                                <option value="0" selected>Default</option>
+                            </select>
+                            <div class="theme-hint" id="presetThemeDescription"></div>
+                            <div class="btn-row"><button class="action-btn primary" id="applyThemeBtn" title="Applies the selected built-in theme preset.">Apply</button></div>
+                            <div class="status-msg" id="themeStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="footer-divider" aria-hidden="true"></div>
+        <div class="footer">
+            <span>Minimal Reddit <b id="mrxVersion"></b></span>
+            <button type="button" id="copyDebugInfo" class="footer-text-btn" title="Copies page diagnostics (no page text, links or block lists) to attach to a bug report">Copy debug info</button>
+            <a class="github-footer-link" href="https://github.com/" target="_blank" rel="noopener noreferrer" title="Open GitHub" aria-label="Open GitHub">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.4 7.86 10.92.58.1.79-.25.79-.55 0-.27-.01-1-.02-1.96-3.2.7-3.88-1.54-3.88-1.54-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.21-1.5 3.18-1.18 3.18-1.18.63 1.59.23 2.77.11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.4-5.26 5.69.41.35.78 1.03.78 2.08 0 1.5-.01 2.7-.01 3.07 0 .3.21.65.8.55A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- ============ TOOLS ============ -->
+    <div id="tab-tools" class="tab-panel active">
+        <section class="section-group" data-section-id="tools-qol">
+            <div class="section-header">
+                <button type="button" class="section-collapse-btn">
+                    <span class="section-icon" data-icon="sparkles" data-icon-size="15"></span>
+                    <span class="section-label-text">Quality of Life</span>
+                    <span class="section-chevron" data-icon="chevron-down" data-icon-size="16"></span>
+                </button>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="card">
+                        <div class="toggle-row" title="Move between posts and gallery images with the arrow keys."><span><i class="row-ico" data-icon="keyboard" data-icon-size="15"></i>Arrow Key Nav (↑↓←→ + Enter)</span><label class="switch"><input type="checkbox" id="arrowKeyNav"><span class="slider"></span></label></div>
+                        <div class="toggle-row" title="Adds a quick search box to the sidebar community list."><span><i class="row-ico" data-icon="search" data-icon-size="15"></i>Search Communities</span><label class="switch"><input type="checkbox" id="communityFilterEnabled"><span class="slider"></span></label></div>
+                        <div class="toggle-row" title="Adds a download button on images and videos."><span><i class="row-ico" data-icon="download" data-icon-size="15"></i>Download Button on Media</span><label class="switch"><input type="checkbox" id="showMediaDownloadButton"><span class="slider"></span></label></div>
+                        <div class="toggle-row" title="Opens images in a clean full-screen viewer with a toolbar."><span><i class="row-ico" data-icon="images" data-icon-size="15"></i>Discord-Style Image Lightbox</span><label class="switch"><input type="checkbox" id="discordStyleLightbox"><span class="slider"></span></label></div>
+                        <div class="toggle-row" title="Floating button to jump back to the top."><span><i class="row-ico" data-icon="arrow-up" data-icon-size="15"></i>Scroll To Top Button</span><label class="switch"><input type="checkbox" id="scrollToTop"><span class="slider"></span></label></div>
+                        <div class="toggle-row" title="Folds AutoModerator comments so threads read cleaner."><span><i class="row-ico" data-icon="bot" data-icon-size="15"></i>Auto-collapse AutoModerator</span><label class="switch"><input type="checkbox" id="collapseAutoMod"><span class="slider"></span></label></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-group" data-section-id="tools-osint">
+            <div class="section-header">
+                <button type="button" class="section-collapse-btn">
+                    <span class="section-icon" data-icon="scan-search" data-icon-size="15"></span>
+                    <span class="section-label-text">OSINT</span>
+                    <span class="section-chevron" data-icon="chevron-down" data-icon-size="16"></span>
+                </button>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="card">
+                        <div class="toggle-row" title="Search an image on Google Lens, Yandex, TinEye and Bing."><span><i class="row-ico" data-icon="image" data-icon-size="15"></i>Reverse Image Search</span><label class="switch"><input type="checkbox" id="showReverseImageSearchButton"><span class="slider"></span></label></div>
+                        <div class="toggle-row" title="Try recovering the original text of a removed or deleted comment from public archives."><span><i class="row-ico" data-icon="archive" data-icon-size="15"></i>Recover deleted comments from public archives</span><label class="switch"><input type="checkbox" id="showArchiveContextButton"><span class="slider"></span></label></div>
+                        <div class="toggle-row" title="Step through a video frame by frame and save frames."><span><i class="row-ico" data-icon="film" data-icon-size="15"></i>Video Keyframe Inspector</span><label class="switch"><input type="checkbox" id="showVideoKeyframeButton"><span class="slider"></span></label></div>
+                        <div class="toggle-row" title="Select and export a region of an image."><span><i class="row-ico" data-icon="crop" data-icon-size="15"></i>Image Crop Tool</span><label class="switch"><input type="checkbox" id="showCropToolButton"><span class="slider"></span></label></div>
+                        <div class="toggle-row" title="Error Level Analysis to spot edited regions."><span><i class="row-ico" data-icon="microscope" data-icon-size="15"></i>Image Forensics (ELA)</span><label class="switch"><input type="checkbox" id="showImageForensicsButton"><span class="slider"></span></label></div>
+                        <div class="toggle-row" title="Measure distances in pixels or calibrated real-world units."><span><i class="row-ico" data-icon="ruler" data-icon-size="15"></i>Pixel Measurement Caliper</span><label class="switch"><input type="checkbox" id="showCaliperButton"><span class="slider"></span></label></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="../shared/icons.js"></script>
+    <script src="../shared/defaults.js"></script>
+    <script src="../shared/themes.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

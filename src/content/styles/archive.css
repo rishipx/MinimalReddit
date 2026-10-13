@@ -1,0 +1,23 @@
+/* Archive recovery controls inherit the active reading theme, including light themes. */
+.mrx-archive-btn {
+    display: inline-block; margin: 4px 0;
+    font: inherit; cursor: pointer;
+    border: 1px solid var(--mrx-theme-border, rgba(255,255,255,0.22));
+    background: var(--mrx-theme-elevated, rgba(255,255,255,0.06));
+    color: var(--mrx-theme-text, inherit); border-radius: 999px;
+    padding: 2px 10px; font-size: 12px; line-height: 1.6;
+}
+.mrx-archive-btn:hover { background: var(--mrx-theme-surface, rgba(255,255,255,0.14)); }
+.mrx-archive-btn:disabled { opacity: 0.65; cursor: progress; }
+.mrx-archive-callout {
+    margin: 4px 0 8px; padding: 8px 12px;
+    border-left: 3px solid var(--mrx-theme-accent, #f39c12);
+    background: var(--mrx-theme-surface, rgba(243,156,18,0.08));
+    color: var(--mrx-theme-text, inherit);
+    border-radius: 0 6px 6px 0;
+    font-size: 13px; line-height: 1.5;
+}
+.mrx-archive-callout.mrx-archive-loading { opacity: 0.86; font-style: italic; }
+.mrx-archive-callout.mrx-archive-error { border-left-color: var(--mrx-theme-border, rgba(255,255,255,0.25)); background: var(--mrx-theme-input, rgba(255,255,255,0.04)); }
+.mrx-archive-meta { color: var(--mrx-theme-muted, inherit); font-size: 11px; opacity: 1; margin-bottom: 4px; }
+.mrx-archive-body { white-space: pre-wrap; word-break: break-word; }

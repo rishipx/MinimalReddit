@@ -1,0 +1,16 @@
+{
+  "name": "minimal-reddit",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A configurable decluttering and customization extension for Reddit.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/validate-release.mjs",
+    "check:syntax": "node scripts/check-syntax.mjs",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

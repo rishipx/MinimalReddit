@@ -1,0 +1,104 @@
+/* Crop overlay */
+.mrx-crop-overlay {
+    position: fixed; inset: 0; z-index: 2147483000;
+    background: rgba(0,0,0,0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex; flex-direction: column;
+    animation: mrx-modal-in 0.18s ease;
+}
+.mrx-crop-toolbar {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 18px;
+    background: rgba(18,18,22,0.82);
+    color: #f2f2f2; font-size: 13px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.mrx-crop-hint { opacity: 0.7; font-size: 12px; }
+.mrx-crop-spacer { flex: 1; }
+.mrx-crop-btn {
+    font: inherit; cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.06);
+    color: inherit; border-radius: 999px;
+    padding: 6px 14px; font-size: 12.5px; font-weight: 500;
+}
+.mrx-crop-btn:hover:not(:disabled) { background: rgba(255,255,255,0.12); }
+.mrx-crop-btn:disabled { opacity: 0.4; cursor: default; }
+.mrx-crop-btn-close { background: rgba(255,69,0,0.14); border-color: rgba(255,69,0,0.28); color: #ff8a75; font-weight: 600; }
+.mrx-crop-stage {
+    flex: 1; position: relative; display: flex; align-items: center; justify-content: center;
+    overflow: auto; background: rgba(0,0,0,0.85);
+    cursor: crosshair; user-select: none;
+}
+.mrx-crop-image { max-width: 92vw; max-height: 88vh; object-fit: contain; display: block; pointer-events: none; user-select: none; }
+.mrx-crop-selection { position: absolute; border: 1.5px dashed #f39c12; background: rgba(243,156,18,0.15); pointer-events: none; }
+
+/* Caliper */
+.mrx-caliper-overlay {
+    position: fixed; inset: 0; z-index: 2147483000;
+    background: rgba(0,0,0,0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex; flex-direction: column;
+    color: #f2f2f2;
+    animation: mrx-modal-in 0.18s ease;
+}
+.mrx-caliper-toolbar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 18px;
+    background: rgba(18,18,22,0.82);
+    font-size: 13px; flex-wrap: wrap;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.mrx-caliper-status { font-size: 12.5px; color: rgba(255,255,255,0.75); font-weight: 500; }
+.mrx-caliper-form {
+    display: flex; align-items: center; gap: 6px;
+    padding: 5px 12px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 999px;
+    font-size: 12px;
+}
+.mrx-caliper-input {
+    width: 70px; font: inherit; font-size: 12px; padding: 4px 8px;
+    border-radius: 6px; border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.05); color: inherit;
+}
+.mrx-caliper-select {
+    font: inherit; font-size: 12px; padding: 4px 8px;
+    border-radius: 6px; border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.05); color: inherit;
+}
+.mrx-caliper-stage {
+    flex: 1; position: relative; display: flex; align-items: center; justify-content: center;
+    overflow: hidden; background: rgba(0,0,0,0.85); cursor: crosshair; user-select: none;
+}
+.mrx-caliper-image { max-width: 92vw; max-height: 82vh; object-fit: contain; display: block; pointer-events: none; user-select: none; }
+.mrx-caliper-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.mrx-caliper-line line { stroke-width: 2; }
+.mrx-caliper-line-calibration line { stroke: #f39c12; }
+.mrx-caliper-line-calibration circle { fill: #f39c12; }
+.mrx-caliper-line-measurement line { stroke: #39d353; }
+.mrx-caliper-line-measurement circle { fill: #39d353; }
+.mrx-caliper-preview line { stroke: #58a6ff; stroke-width: 2; stroke-dasharray: 5 4; }
+.mrx-caliper-preview circle { fill: #58a6ff; }
+.mrx-caliper-plane line { stroke: #a371f7; stroke-width: 2; stroke-dasharray: 6 4; }
+.mrx-caliper-plane circle { fill: #a371f7; }
+.mrx-caliper-plane-picking line { stroke: #a371f7; stroke-width: 1.5; stroke-dasharray: 3 3; opacity: 0.8; }
+.mrx-caliper-plane-picking circle { fill: #a371f7; opacity: 0.9; }
+.mrx-caliper-label {
+    fill: #fff; font-size: 12px; text-anchor: middle;
+    paint-order: stroke; stroke: rgba(0,0,0,0.75); stroke-width: 3px;
+    stroke-linecap: round; stroke-linejoin: round;
+}
+.mrx-caliper-note {
+    padding: 10px 14px; font-size: 11.5px;
+    color: rgba(255,255,255,0.55); background: rgba(18,18,22,0.82);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    text-align: center;
+}
+
+/* Lucide icons inside extension buttons: align with text */
+.mrx-modal-btn, .mrx-crop-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.mrx-modal-btn svg, .mrx-crop-btn svg { flex-shrink: 0; }

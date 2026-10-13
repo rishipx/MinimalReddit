@@ -1,0 +1,54 @@
+/* Page rules: element hiding driven by <html> classes, plus native-media safeguards. */
+
+html.mrx-hide-ads shreddit-ad-post,
+html.mrx-hide-ads [ad="true"],
+html.mrx-hide-ads .promoted-post { display: none !important; }
+
+html.mrx-hide-blurred-media-bg .bg-black { --tw-bg-opacity: 0 !important; }
+html.mrx-hide-blurred-media-bg div[slot="post-media-container"],
+html.mrx-hide-blurred-media-bg div[slot="post-media-container"] > div,
+html.mrx-hide-blurred-media-bg gallery-carousel li:has(img.media-lightbox-img) { background-color: transparent !important; }
+html.mrx-hide-blurred-media-bg div[slot="post-media-container"]:not(:has(.crosspost-title)) > div { border: none !important; }
+html.mrx-hide-blurred-media-bg img.post-background-image-filter { display: none !important; visibility: hidden !important; }
+
+html.mrx-hide-left-sidebar #left-sidebar-container,
+html.mrx-hide-left-sidebar reddit-sidebar-nav { display: none !important; }
+
+html.mrx-hide-chat header span[data-part="chat"] { display: none !important; }
+html.mrx-hide-notifications header span[data-part="inbox"],
+html.mrx-hide-notifications faceplate-loader[name^="HeaderActionItemInbox_"] + div,
+html.mrx-hide-notifications #notifications-inbox-button { display: none !important; }
+html.mrx-hide-create header span[data-part="create"] { display: none !important; }
+html.mrx-hide-advertise-button header span[data-part="advertise"] { display: none !important; }
+
+html.mrx-hide-top-bar shreddit-header,
+html.mrx-hide-top-bar reddit-header-large,
+html.mrx-hide-top-bar #header-spacer { display: none !important; }
+html.mrx-hide-top-bar main,
+html.mrx-hide-top-bar shreddit-app,
+html.mrx-hide-top-bar .grid-container,
+html.mrx-hide-top-bar .page-container { padding-top: 0 !important; margin-top: 0 !important; }
+html.mrx-hide-top-bar #left-sidebar-container,
+html.mrx-hide-top-bar reddit-sidebar-nav,
+html.mrx-hide-top-bar #right-sidebar-container,
+html.mrx-hide-top-bar grid-sidebar {
+    top: 0 !important; max-height: 100vh !important; height: 100vh !important;
+}
+/* Reddit native media must remain visible when extension themes are active. */
+shreddit-player,
+shreddit-player-2,
+gallery-carousel {
+    background: transparent !important;
+    color: inherit !important;
+}
+
+shreddit-player video,
+shreddit-player-2 video {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    background: transparent !important;
+    max-width: 100% !important;
+}
