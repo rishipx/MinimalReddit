@@ -17,7 +17,7 @@
 
 <table>
   <tr>
-    <th colspan="4">Gecko</th>
+    <th colspan="1">Gecko</th>
     <th colspan="4">Chromium</th>
   </tr>
   <tr>
