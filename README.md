@@ -17,8 +17,8 @@
 
 <table>
   <tr>
-    <th></th>
-    <th colspan="4">Chromium Based</th>
+    <th colspan="4">Gecko</th>
+    <th colspan="4">Chromium</th>
   </tr>
   <tr>
     <td align="center">Firefox</td>
